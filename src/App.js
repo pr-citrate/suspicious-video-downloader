@@ -9,14 +9,14 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <Router>
+      <audio
+        src="/background.mp3"
+        autoPlay
+        loop
+        controls={false}
+        className="hidden"
+      />
       <div className="text-neonGreen min-h-screen2">
-        <audio
-          src="/background.mp3"
-          autoPlay
-          loop
-          controls={false}
-          className="hidden"
-        />
         <Navbar/>
         <Routes>
           <Route path="/" element={<Home/>}/>
