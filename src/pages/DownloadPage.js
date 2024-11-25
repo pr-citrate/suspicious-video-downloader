@@ -111,7 +111,7 @@ function DownloadPage() {
       </button>
       <div className="mt-10 flex flex-col items-center" ref={qrRef}>
         <p className="text-neonGreen text-xl">이 링크를 공유하세요:</p>
-        <QRCodeSVG value={window.location} size={128} className="mt-2 animate-spin-slow" />
+        <QRCodeSVG value={window.location.href} size={128} className="mt-2 animate-spin-slow" />
       </div>
       <button
         onClick={handleShare}
