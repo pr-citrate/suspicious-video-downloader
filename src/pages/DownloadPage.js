@@ -1,3 +1,4 @@
+// src/pages/DownloadPage.js
 import React, { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
@@ -6,16 +7,16 @@ function DownloadPage() {
   const { slug } = useParams();
   const qrRef = useRef(null);
 
+  // 슬러그에 따른 다운로드 URL 매핑
   const videoMap = {
-    video1: '1nz8D6OsO_qYgA06EDmtoUxrR8piMVpGB',
-    video2: '1WE_OebYwKo4X4D0tEFB7QcbDqNpln3xl',
-    video3: '1PQ_rgV15nVpCuMWCQwaaUiUpp1Momci0',
-    video4: '1lcTXVSTM5NhEgAmdoZx4XV7ZV8TW3t-p',
-    video5: '1-wU7fskt62v869lm-tEmwPect2Dgxhs9',
+    video1: 'https://drive.google.com/uc?export=download&id=1nz8D6OsO_qYgA06EDmtoUxrR8piMVpGB',
+    video2: 'https://drive.google.com/uc?export=download&id=1WE_OebYwKo4X4D0tEFB7QcbDqNpln3xl',
+    video3: 'https://drive.google.com/uc?export=download&id=1PQ_rgV15nVpCuMWCQwaaUiUpp1Momci0',
+    video4: 'https://drive.google.com/uc?export=download&id=1lcTXVSTM5NhEgAmdoZx4XV7ZV8TW3t-p',
+    video5: 'https://drive.google.com/uc?export=download&id=1-wU7fskt62v869lm-tEmwPect2Dgxhs9',
   };
 
-  const fileId = videoMap[slug];
-  const downloadUrl = fileId ? `/api/download?id=${fileId}` : null;
+  const downloadUrl = videoMap[slug];
 
   const handleDownload = () => {
     if (downloadUrl) {
@@ -51,6 +52,7 @@ function DownloadPage() {
                 await navigator.clipboard.write([item]);
                 alert('QR 코드가 클립보드에 복사되었습니다!');
               } catch (err) {
+                // 이미지 복사 실패 시 URL 복사
                 await navigator.clipboard.writeText(downloadUrl);
                 alert('QR 코드 복사에 실패했습니다. 다운로드 링크가 클립보드에 복사되었습니다!');
               }
@@ -59,6 +61,7 @@ function DownloadPage() {
         };
       } catch (error) {
         console.error('QR 코드 복사 실패:', error);
+        // 에러 발생 시 URL 복사
         await navigator.clipboard.writeText(downloadUrl);
         alert('QR 코드 복사에 실패했습니다. 다운로드 링크가 클립보드에 복사되었습니다!');
       }
@@ -68,6 +71,7 @@ function DownloadPage() {
   if (!downloadUrl) {
     return (
       <div className="flex flex-col items-center p-5">
+        {/* 마퀴 텍스트 추가 */}
         <div className="marquee w-full bg-gray-800 py-2 mt-5">
           <span className="text-neonPink font-comic text-xl">
             잘못된 다운로드 링크! &nbsp; • &nbsp; 잘못된 다운로드 링크! &nbsp; • &nbsp;
@@ -89,6 +93,7 @@ function DownloadPage() {
 
   return (
     <div className="flex flex-col items-center p-5">
+      {/* 마퀴 텍스트 추가 */}
       <div className="marquee w-full bg-gray-800 py-2 mt-5">
         <span className="text-neonPink font-comic text-xl">
           {slug}.exe - 지금 다운로드하세요! &nbsp; • &nbsp; {slug}.exe - 지금 다운로드하세요! &nbsp; • &nbsp;
@@ -106,7 +111,7 @@ function DownloadPage() {
       </button>
       <div className="mt-10 flex flex-col items-center" ref={qrRef}>
         <p className="text-neonGreen text-xl">이 링크를 공유하세요:</p>
-        <QRCodeSVG value={downloadUrl} size={128} className="mt-2 animate-spin-slow" />
+        <QRCodeSVG value={window.location} size={128} className="mt-2 animate-spin-slow" />
       </div>
       <button
         onClick={handleShare}

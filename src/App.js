@@ -9,12 +9,19 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <Router>
-      <div className="text-neonGreen min-h-screen">
-        <Navbar />
+      <div className="text-neonGreen min-h-screen2">
+        <audio
+          src="/background.mp3"
+          autoPlay
+          loop
+          controls={false}
+          className="hidden"
+        />
+        <Navbar/>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/:slug" element={<DownloadPage />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Home/>}/>
+          <Route path="/:slug" element={<DownloadPage/>}/>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>
     </Router>

@@ -13,13 +13,6 @@ function Home() {
 
   return (
     <div className="flex flex-col items-center p-5">
-      <audio
-        src="/background.mp3"
-        autoPlay
-        loop
-        controls={false}
-        className="hidden"
-      />
       <div className="marquee w-full bg-gray-800 py-2">
         <span className="text-neonPink font-comic text-xl">
           최신 크랙 프로그램! 클릭해서 다운로드! &nbsp; • &nbsp;
